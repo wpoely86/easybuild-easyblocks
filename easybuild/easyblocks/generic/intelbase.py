@@ -296,7 +296,7 @@ class IntelBase(EasyBlock):
                 silent += 'COMPONENTS=' + ';'.join('"%s"' % val for val in self.cfg['components']) + '\n'
             # a single components like, 'ALL' or 'DEFAULT' is specified
             else:
-                silent += 'COMPONENTS=%s\n' % self.cfg['components']
+                silent += 'COMPONENTS=%s\n' % self.cfg['components'][0]
 
         if silent_cfg_extras is not None:
             if isinstance(silent_cfg_extras, dict):
