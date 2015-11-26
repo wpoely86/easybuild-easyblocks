@@ -102,6 +102,7 @@ class IntelBase(EasyBlock):
             # disables TMP_PATH env and command line option
             'usetmppath': [False, "Use temporary path for installation", CUSTOM],
             'm32': [False, "Enable 32-bit toolchain", CUSTOM],
+            'components': [[], "List of components to install", CUSTOM],
         })
 
         return extra_vars
@@ -286,6 +287,14 @@ class IntelBase(EasyBlock):
             'license_file': self.license_file,
             'install_dir': silent_cfg_names_map.get('install_dir', self.installdir),
         }
+
+        if self.cfg['components']:
+            # a list of components is specified
+            if len(self.cfg['components']) > 1:
+                silent += 'COMPONENTS=' + ';'.join('"%s"' % val for val in self.cfg['components']) + '\n'
+            # a single components like, 'ALL' or 'DEFAULT' is specified
+            else:
+                silent += 'COMPONENTS=%s\n' % self.cfg['components']
 
         if silent_cfg_extras is not None:
             if isinstance(silent_cfg_extras, dict):

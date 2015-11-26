@@ -49,13 +49,15 @@ class EB_ifort(EB_icc, IntelBase):
         """Custom sanity check paths for ifort."""
 
         binprefix = "bin/intel64"
-        libprefix = "lib/intel64/lib"
+        libprefix = "lib/intel64"
         if LooseVersion(self.version) >= LooseVersion("2011"):
             if LooseVersion(self.version) <= LooseVersion("2011.3.174"):
                 binprefix = "bin"
             elif LooseVersion(self.version) >= LooseVersion("2013_sp1"):
                 binprefix = "bin"
                 libprefix = "lib/intel64/lib"
+                if LooseVersion(self.version) >= LooseVersion("2016"):
+                    libprefix = "lib/intel64_lin"
             else:
                 libprefix = "compiler/lib/intel64/lib"
 

@@ -75,12 +75,10 @@ class EB_icc(IntelBase):
                 'license_file_name': LICENSE_FILE_NAME_2012,
             }
 
-        cfg_extras_map = {}
-        if LooseVersion(self.version) >= LooseVersion('2016'):
-            cfg_extras_map = {
-                'COMPONENTS': 'ALL',
-            }
-        super(EB_icc, self).install_step(silent_cfg_names_map=silent_cfg_names_map, silent_cfg_extras=cfg_extras_map)
+        if LooseVersion(self.version) >= LooseVersion('2016') and not self.cfg['components']:
+            self.cfg['components'].append("DEFAULT")
+
+        super(EB_icc, self).install_step(silent_cfg_names_map=silent_cfg_names_map)
 
     def sanity_check_step(self):
         """Custom sanity check paths for icc."""
@@ -136,6 +134,7 @@ class EB_icc(IntelBase):
                 (out, _) = run_cmd(cmd, log_all=True, simple=False)
                 ver_re = re.compile("^gcc \(GCC\) (?P<version>[0-9.]+) [0-9]+", re.M)
                 gccversion = ver_re.search(out).group('version')
+                self.log.warning("Using system GCC version %s" % gccversion)
 
             # TBB directory structure
             # https://www.threadingbuildingblocks.org/docs/help/tbb_userguide/Linux_OS.htm
