@@ -289,6 +289,7 @@ class IntelBase(EasyBlock):
         }
 
         if self.cfg['components']:
+            self.log.debug("Components found: %s " % self.cfg['components'])
             # a list of components is specified
             if len(self.cfg['components']) > 1:
                 silent += 'COMPONENTS=' + ';'.join('"%s"' % val for val in self.cfg['components']) + '\n'

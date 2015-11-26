@@ -75,7 +75,9 @@ class EB_icc(IntelBase):
                 'license_file_name': LICENSE_FILE_NAME_2012,
             }
 
+        self.log.debug("components: %s" % self.cfg['components'])
         if LooseVersion(self.version) >= LooseVersion('2016') and not self.cfg['components']:
+            self.log.info("Using DEFAULT TARGET")
             self.cfg['components'].append("DEFAULT")
 
         super(EB_icc, self).install_step(silent_cfg_names_map=silent_cfg_names_map)
