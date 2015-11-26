@@ -78,7 +78,7 @@ class EB_icc(IntelBase):
         self.log.debug("components 1: %s" % self.cfg['components'])
         if LooseVersion(self.version) >= LooseVersion('2016') and not self.cfg['components']:
             self.log.info("Using DEFAULT TARGET")
-            self.cfg['components'] += ['DEFAULT']
+            self.cfg['components'] += ['DEFAULTS']
 #            self.cfg.update('components', 'DEFAULT')
 
         self.log.debug("components 2: %s" % self.cfg['components'])
