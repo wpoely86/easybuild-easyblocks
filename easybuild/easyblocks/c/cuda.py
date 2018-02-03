@@ -145,7 +145,7 @@ class EB_CUDA(Binary):
 
         guesses.update({
             'PATH': ['open64/bin', 'bin'],
-            'LD_LIBRARY_PATH': ['lib64'],
+            'LD_LIBRARY_PATH': ['lib64', 'extras/CUPTI/lib64'],
             'CPATH': ['include'],
             'CUDA_HOME': [''],
             'CUDA_PATH': [''],
